@@ -2,6 +2,7 @@ package com.example.service.tasks;
 
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -15,7 +16,8 @@ public class TaskService {
     }
 
     public void sendNotificationForDueTasks() {
-        List<Task> dueTasks =  repository.findDueTasks();
+        LocalDateTime deadline = LocalDateTime.now().plusDays(1);
+        List<Task> dueTasks =  repository.findDueTasksWithinDeadline(deadline);
         for (Task dueTask : dueTasks) {
             NotificationRequest request = new NotificationRequest(
                     "Sua tarefa: " + dueTask.getTitle() + " está prestes a vencer!",
