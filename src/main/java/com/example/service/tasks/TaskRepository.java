@@ -9,7 +9,7 @@ import java.util.List;
 public interface TaskRepository extends JpaRepository<Task, Long> {
     @Query("""
             SELECT t
-            FROM Task
+            FROM Task t
             WHERE t.dueDate <= :deadline
             AND t.notified = false
             """)
