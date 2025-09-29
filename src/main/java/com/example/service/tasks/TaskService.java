@@ -22,8 +22,11 @@ public class TaskService {
             NotificationRequest request = new NotificationRequest(
                     "Sua tarefa: " + dueTask.getTitle() + " está prestes a vencer!",
                     dueTask.getEmail());
+
             client.sendNotification(request);
             dueTask.setNotified(true);
+
+            repository.save(dueTask);
         }
     }
 }
